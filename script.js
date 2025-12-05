@@ -7,8 +7,8 @@ let majorDeck = [];
 
     
 class arcaneMajor {             //arcane major card
-    constructor(index, name) {
-        this.index = index;         //storage index in sorted deck. Value is same as index 
+    constructor(index) {
+        this.index = index+1;         //storage index in sorted deck. Value is same as index 
     }
 }    
 
@@ -18,7 +18,7 @@ class arcaneMajor {             //arcane major card
 
 function createMajorDeck(){
     for(i=0; i<majorSize; i++){
-        let newCard = new arcaneMajor(i, majorNames[i]);
+        let newCard = new arcaneMajor(i);
         majorDeck.push(newCard);
     }
 }
@@ -58,7 +58,6 @@ function drawCard(currentDeck, deckType) {
     
     if(deckType === 'major'){
         document.getElementById('major_deck').src = "img/major/"+majorCurrent[majorCardIndex].index+".jpg";
-        document.getElementById('name_major').innerHTML= "<p>"+majorCurrent[majorCardIndex].name+"</p>";
         if (majorCardIndex > majorSize-2) {      //shuffle if empty
             shuffleDeck(majorCurrent);
             majorCardIndex = 0;
@@ -163,4 +162,5 @@ function valueTranslator(card) {
 
 //console.log(majorDeck);
 //console.log(majorCurrent);
+
 //console.log(gameStarting);
