@@ -1,101 +1,55 @@
-//---------------------------------------//
-//---------VARIABLES AND CLASSES---------//
+<script>
+        let DECK = [];
+        let CURRENT_CARD = 0;
 
-const majorSize = 170;       //deck size for major arcana
+        // Mescola il deck
+        function shuffleDeck() {
+            DECK = Array.from({ length: 170 }, (_, i) => i + 1);
 
-let majorDeck = [];
+            for (let i = DECK.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [DECK[i], DECK[j]] = [DECK[j], DECK[i]];
+            }
 
-    
-class arcaneMajor {             //arcane major card
-    constructor(index) {
-        this.index = index+1;         //storage index in sorted deck. Value is same as index 
-    }
-}    
+            CURRENT_CARD = 0;
 
-//--------------------------------//
-//---------INITIALIZATION---------//
+            document.getElementById("cardDisplay").textContent =
+                "Mazzo mescolato! Pronto a partire dalla prima carta.";
 
-
-function createMajorDeck(){
-    for(i=0; i<majorSize; i++){
-        let newCard = new arcaneMajor(i);
-        majorDeck.push(newCard);
-    }
-}
-
-
-createMajorDeck();
-
-
-//-------------------------//
-//---------SHUFFLE---------//
-
-let majorCurrent = majorDeck.slice();
-
-//Fisher Yates Method to shuffle chosen deck
-function shuffleDeck(deckToShuffle){
-    for(i=deckToShuffle.length-1; i>0; i--) {
-        j = Math.floor(Math.random()*i);
-        k = deckToShuffle[i];
-        deckToShuffle[i] = deckToShuffle[j];
-        deckToShuffle[j] = k;
-    }
-}
-
-function init() {
-    shuffleDeck(majorCurrent);
-}
-
-init();
-
-//----------------------//
-//---------DRAW---------//
-
-let majorCardIndex = 0;
-
-//draw a card when button is pressed
-function drawCard(currentDeck, deckType) {
-    
-    if(deckType === 'major'){
-        document.getElementById('major_deck').src = "img/major/"+majorCurrent[majorCardIndex].index+".jpg";
-        if (majorCardIndex > majorSize-2) {      //shuffle if empty
-            shuffleDeck(majorCurrent);
-            majorCardIndex = 0;
-        }    
-        else {
-            hideBtn('shuffle_major');
+            document.getElementById("cardImage").style.display = "none";
         }
-        majorCardIndex++;   
-    }
-}
 
+        // Restituisce "n.jpg" e incrementa CURRENT_CARD
+        function getNextCard() {
+            if (CURRENT_CARD >= DECK.length) {
+                return null;
+            }
 
-document.getElementById('draw_major').addEventListener('click', function(){
-    drawCard(majorCurrent, 'major');
-});
+            const filename = DECK[CURRENT_CARD] + ".jpg";
+            CURRENT_CARD++;
+            return filename;
+        }
 
+        // Mostra la carta estratta e l'immagine corrispondente
+        function showNextCard() {
+            const card = getNextCard();
 
-//-------------------------//
-//---------BUTTONS---------//
+            if (card === null) {
+                document.getElementById("cardDisplay").textContent =
+                    "Hai raggiunto la fine del mazzo!";
+                document.getElementById("cardImage").style.display = "none";
+                return;
+            }
 
-function showBtn(buttonID) {
-    document.getElementById(buttonID).style.display = 'block';
-}
+            document.getElementById("cardDisplay").textContent =
+                "Carta estratta: " + card;
 
-function hideBtn(buttonID) {
-    document.getElementById(buttonID).style.display = 'none';
-}
+            const imgPath = "img/" + card;
+            const imgElement = document.getElementById("cardImage");
+            imgElement.src = imgPath;
+            imgElement.style.display = "block";
+        }
 
-document.getElementById('shuffle_major').addEventListener('click', function() {
-    shuffleDeck(majorCurrent);
-    majorCardIndex = 0;
-    hideBtn('shuffle_major');
-    document.getElementById('major_deck').src = "img/back.jpg";
-});
-
-
-//console.log(majorDeck);
-//console.log(majorCurrent);
-
-//console.log(gameStarting);
-
+        // Inizializzazione automatica
+        window.addEventListener("DOMContentLoaded", shuffleDeck);
+    </script>
