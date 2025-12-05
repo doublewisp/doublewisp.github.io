@@ -1,4 +1,3 @@
-1 Abundant Harvest
 1 Academy Loremaster
 1 Aether Barrier
 1 Alliance of Arms
@@ -104,6 +103,7 @@
 1 Mindlock Orb
 1 Minds Aglow
 1 Modify Memory
+1 Abundant Harvest
 1 Mystic Barrier
 1 Naked Singularity
 1 Nether Void
