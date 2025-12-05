@@ -91,76 +91,11 @@ document.getElementById('shuffle_major').addEventListener('click', function() {
     majorCardIndex = 0;
     hideBtn('shuffle_major');
     document.getElementById('major_deck').src = "img/back.jpg";
-    document.getElementById('name_major').innerHTML= "<p></p>";
 });
-
-//-------------------------//
-//---------IMAGES----------//
-
-function imgTranslator(card){
-    let numeric, literal;
-    switch (card.value){
-            case 1:
-                numeric = 'A';
-                break;
-            case 11:
-                numeric = 'J';
-                break;
-            /*case 12:                
-                numeric = 'H';
-                break;*/
-            case 12:
-                numeric = 'Q';
-                break;
-            case 13:
-                numeric = 'K';
-                break;
-            default:
-                numeric = card.value;
-    }
-    switch (card.suitString){
-            case 'Hearts':
-                literal = 'H';
-                break;
-            case 'Diamonds':
-                literal = 'D';
-                break;
-            case 'Clubs':
-                literal = 'C';
-                break;
-            case 'Spades':
-                literal = 'S';
-                break;
-    }
-    return numeric + literal + '.png';
-}
-
-function valueTranslator(card) {
-    let literal;
-    switch (card.value){
-            case 1:
-                literal = 'Ace';
-                break;
-            case 11:
-                literal = 'Jack';
-                break;
-            /*case 12:                
-                literal = 'Knight';
-                break;*/
-            case 12:
-                literal = 'Queen';
-                break;
-            case 13:
-                literal = 'King';
-                break;
-            default:
-                literal = card.value;
-    }
-    return literal;
-}
 
 
 //console.log(majorDeck);
 //console.log(majorCurrent);
 
 //console.log(gameStarting);
+
