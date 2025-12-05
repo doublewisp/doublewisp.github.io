@@ -1,37 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
-        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
-        <link type="text/css" rel="stylesheet" href="style.css">
-        
-        <title>Caos Deck</title>
-    </head>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CAOS DECK</title>
 
-    <body>
-        <div class="wrapper clearfix">
-            <div class="deck-panel" id=major_arcana>
-                <div class="deck-title">
-                    <p>Caos Deck</p>
-                </div>
-                <div class="deck">
-                    <img src="img/back.jpg" alt="" class="deck_img" id="major_deck">
-                    <div class="card-name" id='name_major'>
-                    </div>
-                </div>
-                <div class="btn-wrapper">
-                    <div class="btn btn-draw" id="draw_major">
-                        <p>Draw a new card</p>
-                    </div>
-                    <div class="btn btn-shuffle active" id="shuffle_major">
-                        <p>Shuffle deck</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-            
-        <script src="script.js"></script>
-    </body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Titolo in alto */
+        #titleBar {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            background: #222;
+            flex: 0 0 auto;
+        }
+
+        /* Area centrale dell'immagine */
+        #imageContainer {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #cardImage {
+            max-height: 90%;
+            max-width: 95%;
+            border-radius: 20px;
+            border: 3px solid #444;
+        }
+
+        /* Sezione bottoni */
+        #buttons {
+            flex: 0 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            background: #222;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #444;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Titolo -->
+    <div id="titleBar">CAOS DECK</div>
+
+    <!-- Immagine centrale grande -->
+    <div id="imageContainer">
+        <img id="cardImage" src="img/back.jpg" alt="Carta">
+    </div>
+
+    <!-- Bottoni -->
+    <div id="buttons">
+        <button onclick="shuffleDeck()">Mescola Mazzo</button>
+        <button onclick="showNextCard()">Pesca Carta</button>
+    </div>
+
+    <script>
+        let DECK = [];
+        let CURRENT_CARD = 0;
+        let firstClickDone = false;
+
+        // Mescola il deck
+        function shuffleDeck() {
+            DECK = Array.from({ length: 170 }, (_, i) => i + 1);
+
+            for (let i = DECK.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [DECK[i], DECK[j]] = [DECK[j], DECK[i]];
+            }
+
+            CURRENT_CARD = 0;
+            firstClickDone = false;
+
+            // torna a mostrare back.jpg
+            document.getElementById("cardImage").src = "img/back.jpg";
+        }
+
+        // Restituisce next card
+        function getNextCard() {
+            if (CURRENT_CARD >= DECK.length) {
+                return null;
+            }
+            const filename = DECK[CURRENT_CARD] + ".jpg";
+            CURRENT_CARD++;
+            return filename;
+        }
+
+        // Mostra immagine della carta estratta
+        function showNextCard() {
+            // Se è la prima volta che si clicca, non usiamo back.jpg
+            const card = getNextCard();
+
+            if (card === null) {
+                // fine mazzo
+                return;
+            }
+
+            const imgPath = "img/" + card;
+            document.getElementById("cardImage").src = imgPath;
+
+            firstClickDone = true;
+        }
+
+        // Inizializzazione
+        window.addEventListener("DOMContentLoaded", () => {
+            shuffleDeck(); // include già back.jpg
+        });
+    </script>
+
+</body>
 </html>
