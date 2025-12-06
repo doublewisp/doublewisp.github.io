@@ -14,19 +14,34 @@
 
     <!-- Immagine centrale grande -->
     <div id="imageContainer">
-        <img id="cardImage" src="load.gif" alt="Carta">
+        <img id="cardImage" src="img/load.gif" alt="Carta">
     </div>
+
+    <!-- Ultime estratte -->
+    <div id="hystory">
+       <img class="past-card" src="img/back.jpg" alt="carta" id="past1" onclick="setVisible('past1','1')">
+       <img class="past-card" src="img/back.jpg" alt="carta" id="past2" onclick="setVisible('past2','2')"> 
+       <img class="past-card" src="img/back.jpg" alt="carta" id="past3" onclick="setVisible('past3','3')">
+       <img class="past-card" src="img/back.jpg" alt="carta" id="past4" onclick="setVisible('past4','4')">
+    </div>
+
+    <!-- Panel ultime estratte -->
+        <img class="cardPanel" src="img/back.jpg" alt="carta" id="pastCard">
+        <div id="overlay"></div>
+        <button id="menu" onclick="hideAll()">Chiudi</button>
+
 
     <!-- Bottoni -->
     <div id="buttons">
-        <button onclick="shuffleDeck()">Mescola Mazzo</button>
-        <button onclick="showNextCard()">Pesca Carta</button>
+        <button class="choice" onclick="shuffleDeck()">Mescola Mazzo</button>
+        <button class="choice" onclick="showNextCard()">Pesca Carta</button>
     </div>
+
+
 
 
  <script src="script.js"></script>
 
 
 </body>
-
 </html>

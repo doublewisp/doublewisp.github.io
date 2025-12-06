@@ -16,12 +16,12 @@
         #titleBar {
             text-align: center;
             padding: 2%;
-            font-size: 40px;
+            font-size: 35px;
             font-weight: bold;
             letter-spacing: 3px;
             background: #222;
             flex: 0 0 auto;
-            height: 8%;
+            height: 5%;
         }
 
         /* Area centrale dell'immagine */
@@ -42,6 +42,46 @@
             border: 3px solid #444;
         }
 
+        .cardPanel {
+            border-radius: 20px;
+            border: 3px solid #444;
+            height: 70vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index:99;
+            visibility: hidden;
+        }
+
+        #overlay {
+            position: absolute;
+            background-color: lightgrey;
+            opacity: 40%;
+            width: 100vw;
+            height: 100vh;
+            visibility: hidden;
+            z-index: 5;
+        }
+
+        /* Sezione cronologia */
+        #hystory {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 2px;
+            height: 10%;
+        }
+
+        .past-card {
+            max-height: 90%;
+            max-width: 95%;
+            border-radius: 2px;
+            border: 2px solid #444;
+            margin-bottom: 5px;
+        }
+
         /* Sezione bottoni */
         #buttons {
             flex: 0 0 auto;
@@ -50,11 +90,12 @@
             gap: 5%;
             padding: 10px;
             background: #222;
-            height: 10%;
+            height: 7%;
+            margin-bottom: 50px;
         }
 
-        button {
-            font-size: 20px;
+        button.choice {
+            font-size: 35px;
             padding:0 50px;
             border: none;
             border-radius: 10px;
@@ -64,6 +105,22 @@
             transition: 0.2s;
         }
 
-        button:hover {
+        button.choice:hover {
             background: #666;
+        }
+
+        #menu{
+            position: absolute;
+            background-color: black;
+            color: antiquewhite;
+            width: 50px;
+            height: 50px;
+            top: 50px;
+            right: 50px;
+            z-index: 99;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            visibility: hidden;
         }
